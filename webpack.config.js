@@ -3,7 +3,7 @@ const HtmlWepackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        reload: './src/index.js'
+        pubsub: './src/index.js'
     },
     output: {
         filename: '[name].js',
