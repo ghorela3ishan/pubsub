@@ -20,7 +20,6 @@ class Pubsub {
             let index = position - 1;
             return ({
                 unsubscribe: () => {
-                    console.log(this, index, event, this.subscriptions);
                     this.subscriptions[event].splice(index, 1);
                 }   
             });

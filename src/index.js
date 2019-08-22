@@ -1,5 +1,7 @@
 import pubsub from './pubsub/PubSub';
+import PubsubWrapped from './PubsubWrapped';
 
+let PubsubWrappedInstance = new PubsubWrapped(); 
 window.globalVar = 44;
 // subsciber to event 'shout'
 // 1 Create ordinary subscriber with arrow function
@@ -9,13 +11,13 @@ let eventHandler = (data) => {
     alert('shout ' + data);
 }
 let ordinary = pubsub.subscribe('shout', eventHandler);
-// ordinary.unsubscribe();
+ordinary.unsubscribe();
 
 // 2. Create subscriber with inline callback
 let inline = pubsub.subscribe('shout', function(){
     console.log('From Inline ( 2 ) subsciber', this.globalVar);
 });
-// inline.unsubscribe();
+inline.unsubscribe();
 
 // 3. Create subscriber with predefined context
 let moduleObj = {
@@ -26,8 +28,7 @@ let moduleObj = {
 }
 let moduleEventHandler = moduleObj.getX;
 let moduleSubObj = pubsub.subscribe('shout', moduleEventHandler, moduleObj);
-console.log(moduleSubObj);
-// moduleSubObj.unsubscribe();
+moduleSubObj.unsubscribe();
 
 
 // publish the event after a delay of 3 seconds
