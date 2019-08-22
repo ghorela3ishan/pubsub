@@ -1,12 +1,36 @@
 import pubsub from './pubsub/PubSub';
 
-// let obj = new Pubsub();
+window.globalVar = 44;
+// subsciber to event 'shout'
+// 1 Create ordinary subscriber with arrow function
 let eventHandler = (data) => {
+    // gives an error because this is an arrow function and it doesnt have its own 'this'
+    // console.log('From Ordinary ( 1 ) subsciber', this.globalVar)
     alert('shout ' + data);
 }
+let ordinary = pubsub.subscribe('shout',eventHandler);
+// ordinary.unsubscribe();
 
-pubsub.subscribe('shout',eventHandler);
+// 2. Create subscriber with inline callback
+let inline = pubsub.subscribe('shout', function(){
+    console.log('From Inline ( 2 ) subsciber', this.globalVar);
+});
+// inline.unsubscribe();
 
+// 3. Create subscriber with predefined context
+let module = {
+    x: 42,
+    getX: function() {
+        console.log('From predefined context ( 3 ) subsciber', this.x);
+    }
+}
+let moduleEventHandler = module.getX;
+let moduleSubObj = pubsub.subscribe('shout', moduleEventHandler, module);
+console.log(moduleSubObj);
+// moduleSubObj.unsubscribe();
+
+
+// publish the event after a delay of 5 seconds
 setTimeout(function(){
     pubsub.publish('shout', 'yayy')
-}, 5000);
+}, 3000);

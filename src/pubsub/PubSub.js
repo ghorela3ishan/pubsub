@@ -1,15 +1,16 @@
 class Pubsub {
     subscriptions = {};
 
-    subscribe = (event, eventHandler, context) => {
-            eventHandler.bind(context);
+    subscribe = (event, eventHandler, context = window) => {
+            let eventHandlerWithContext = eventHandler.bind(context);
             if(!this.subscriptions[event]) {
                 this.subscriptions[event] = [];
             }
-            let position = this.subscriptions[event].push(eventHandler);
+            let position = this.subscriptions[event].push(eventHandlerWithContext);
             let index = position - 1;
-            return({
+            return ({
                 unsubscribe: () => {
+                    console.log(this, index, event, this.subscriptions);
                     this.subscriptions[event].splice(index, 1);
                 }   
             });
@@ -23,5 +24,5 @@ class Pubsub {
     };
 }
 
-let instance = new Pubsub();
-export default instance;
+let pubsubInstance = new Pubsub();
+export default pubsubInstance;
