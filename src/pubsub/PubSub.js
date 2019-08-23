@@ -1,8 +1,17 @@
 class Pubsub {
     /**
-     * object that contains key value pairs of event (event type will be string) and an array of associated callbacks
+     * constructor below checks if instance property already exists on Pubsub prototype ( to make
+     * 'Pubsub', a singleton class ). 
+     * subscriptions ( class property ) is an object that contains key value pairs of event 
+     * (event type will be string) and an array of associated callbacks.
      */ 
-    subscriptions = {};
+    constructor() {
+        if(!Pubsub.instance) {
+            this.subscriptions = {};
+            Pubsub.instance = this;
+        }
+        return Pubsub.instance;
+    }
 
     /**
      * adds the received eventHandler to the array of received event after binding with provided context

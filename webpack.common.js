@@ -14,10 +14,6 @@ module.exports = {
             template: 'index.html'
         })
     ],
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: '/dist'
-    },
     module: {
         rules: [
             { test: /\.js$/, exclude: /node-modules/, loader: 'babel-loader'}
