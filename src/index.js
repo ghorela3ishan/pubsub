@@ -1,21 +1,22 @@
-import pubsub from './pubsub/PubSub';
+// import pubsub instance from the library ( or use global varibale 'pubsub' available on window )
+import instance from './pubsub/PubSub';
 import PubsubWrapped from './PubsubWrapped';
-window.globalVar = 44;
 
-// 0 Subsciber wrapped in a class.
+// 1 Subsciber wrapped in a class.
 let PubsubWrappedInstance = new PubsubWrapped(); 
 
-// 1 Create ordinary subscriber with arrow function
+// 1 Create ordinary subscriber with arrow function. ( arrow functions can't be binded to external context )
+// so they always refer to context of their parent scope.
 let eventHandler = (data) => {
-    // gives an error on console statement because this is an arrow function and it doesnt have its own 'this'
-    console.log(' From ordinary arrow function subscriber ( 1 )', data);
+    console.log('From ordinary arrow function subscriber ( 2 )', data);
 }
-let ordinary = pubsubInstance.subscribe('shout', eventHandler);
+let ordinary = instance.subscribe('shout', eventHandler);
 // ordinary.unsubscribe();
 
 // 2. Create subscriber with inline callback
-let inline = pubsubInstance.subscribe('shout', function(){
-    console.log('From Inline ( 2 ) subsciber', this.globalVar);
+window.globalVar = 44;
+let inline = pubsub.subscribe('shout', function(){
+    console.log('From Inline ( 3 ) subsciber', this.globalVar);
 });
 // inline.unsubscribe();
 
@@ -23,25 +24,31 @@ let inline = pubsubInstance.subscribe('shout', function(){
 let moduleObj = {
     x: 42,
     getX: function() {
-        console.log('From predefined context ( 3 ) subsciber', this.x);
+        console.log('From predefined context ( 4 ) subsciber', this.x);
     }
 }
 let moduleEventHandler = moduleObj.getX;
-let moduleSubObj = pubsubInstance.subscribe('shout', moduleEventHandler, moduleObj);
+let moduleSubObj = pubsub.subscribe('shout', moduleEventHandler, moduleObj);
 // moduleSubObj.unsubscribe();
 
 // 4 passing an invalid eventHandler 
 let inValidaHandler = '4';
 try {
-    let exceptionObj = pubsubInstance.subscribe('shout', inValidaHandler);
+    let exceptionObj = pubsub.subscribe('', moduleEventHandler);
 } catch (e) {
     console.log(e);
 }
 
-// publish the event after a delay of 3 seconds
+// publish the event after a delay of 5 seconds
 setTimeout(function(){
-    pubsubInstance.publish('shout', 'yayy');
+    pubsub.publish('shout', 'yayy');
 }, 5000);
-pubsubInstance.subscribe('shout', function() {alert('synced')});
-pubsubInstance.subscribe('shout2', function(){alert(' From shout2 ( 0 )')})
-pubsubInstance.publish('shout2');
+pubsub.subscribe('shout', function() {alert('synced')});
+
+// New event shout2
+pubsub.subscribe('shout2', function(){alert(' From shout2 ( 0 )')})
+try {
+    pubsub.publish('shout2');
+} catch (e) {
+    console.log(e);
+}

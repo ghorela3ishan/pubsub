@@ -1,17 +1,22 @@
-if(typeof(window.pubsubInstance) == 'undefined'){
-    class Pubsub {
+/**
+ * create a local variable to store reference to PubsubClass instance
+ */
+let pubsub;
+// check to verify is pubsub variables already exists on window to prevent override
+if(typeof(window.pubsub) == 'undefined'){
+    class PubsubClass {
         /**
-         * constructor below checks if instance property already exists on Pubsub prototype ( to make
-         * 'Pubsub', a singleton class ). 
+         * constructor below checks if instance property already exists on PubsubClass prototype ( to make
+         * 'PubsubClass', a singleton class ). 
          * subscriptions ( class property ) is an object that contains key value pairs of event 
          * (event type will be string) and an array of associated callbacks.
          */ 
         constructor() {
-            if(!Pubsub.instance) {
+            if(!PubsubClass.instance) {
                 this.subscriptions = {};
-                Pubsub.instance = this;
+                PubsubClass.instance = this;
             }
-            return Pubsub.instance;
+            return PubsubClass.instance;
         }
 
         /**
@@ -22,6 +27,12 @@ if(typeof(window.pubsubInstance) == 'undefined'){
          * @param { context } object
          */
         subscribe = (event, eventHandler, context = window) => {
+                if (event == '' || event == undefined) {
+                    throw { 
+                            type: 'Error',
+                            message: 'event name can not be left blank.'            
+                    }
+                }
                 if (typeof(eventHandler) != 'function') {
                     throw { 
                             type: 'Error',
@@ -48,13 +59,23 @@ if(typeof(window.pubsubInstance) == 'undefined'){
          * @param { payload } object
          */
         publish = (event, payload) => {
+            if( event == '' || event == undefined) throw { 
+                type: 'Error',
+                message: 'event name can not be left blank.'            
+            };
             if(!this.subscriptions[event]) return;
             this.subscriptions[event].forEach(eventHandler => {
                 eventHandler(payload);
             });
         };
     }
-    window.pubsubInstance = new Pubsub();
+    pubsub = new PubsubClass();
+    // bind to window so that globally single instance is maintained to prevent overriding of subscriptions
+    window.pubsub = pubsub;
 }
+else{
+   pubsub = window.pubsub; 
+}
+export default pubsub;
 
 
