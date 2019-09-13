@@ -1,9 +1,11 @@
-1. Pubsub is a lightweight library that helps achieve communication between two applications using           publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs     of event and their corresponding handlers. (key is used to store the name of the event and it's value     is another object which in turn manages key value pairs of randomly time stamped generated keys and       subsciber handler of the events.)
+# Pubsub.js
+ Pubsub is a lightweight library that helps achieve communication between two applications using          publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs    of event and their corresponding handlers. (key is used to store the name of the event and it's value    is another object which in turn manages key value pairs of randomly time stamped generated keys and      subsciber handler of the events.)
 
-2. PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
-   however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
+# Pubsub.js global instance
+ PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
+ however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
 
-3. Subscribing to an event:
+# Subscribing to an event:
     1. Subscribe to an event using 'subscribe' function of the pubsub object.
     2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a mandatory      parameter ). 
     3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
@@ -19,7 +21,7 @@
         }
         var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
 
-4. Unsubscribing to an event:
+# Unsubscribing to an event:
     1. Upon successful execution 'subscribe' function returns an object.
         ```javascript
         var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
@@ -34,7 +36,7 @@
         ``` 
         successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
 
-5. Publishing an event:
+# Publishing an event:
     1. Publish to an event using 'publish' function of the pubsub object.
     2. @param { event } string ( This is a mandatory parameter. Throws an exception if event is blank or undefined )
     3. @param { payload } object ( This is an optional parameter. Pass the data to be consumed in the eventHandler )
@@ -46,12 +48,12 @@
         pubsub.publish('buttonClicked', { source: 'resdex', appId: '112'});
         ```
 
-6. Precautions to be kept while using:
+# Precautions to be kept:
     1. Always remember to clear ( unsubcribe ) the subscriber using the subsciption instance when the 
     subscriber is no longer required. 
     2. Avoid copies of subscription.
 
-7. For examples and illustrations, follow the steps below:
+# For examples and illustrations, follow the steps below:
     1. Clone the repo.
     2. Run 'npm install'
     3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
