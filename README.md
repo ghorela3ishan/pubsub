@@ -3,7 +3,7 @@
 
 ## Pubsub.js global instance
  PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
- however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
+ however it is ensured that even in the case when there are multiple imports on the same web page, only one common instance exists. Hence the instance is singleton in nature;
 
 ## Implementation
 1. Subscribing to an event:
