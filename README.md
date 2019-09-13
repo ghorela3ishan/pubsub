@@ -62,4 +62,4 @@
 ## Precautions to be kept:
  1. Always remember to clear ( unsubcribe ) the subscriber using the subsciption instance when the 
  subscriber is no longer required. 
- 2. Avoid copies of subscription. Unsubscirbe before you subscribe again. If you have already subscribed to an event and subcribe again to the same event (eg: if you subscriber to an event on click of a button ), this will create a copy in the subscriptions.
+ 2. Avoid copies of subscription. Unsubscirbe before you subscribe again. If you have already subscribed to an event and subcribe again to the same event (eg: if you subscribe to an event on click of a button ), this will create a copy in the subscriptions.
