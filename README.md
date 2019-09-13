@@ -8,17 +8,23 @@
     2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a mandatory      parameter ). 
     3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
     4. @param { context } object ( It is an optional parameter. Binds the eventHandler to given context. Arrow functions can't be binded to custom context).
+        ```
         subscribe(event, eventHandler, context);
+        ```
     5. Example to subscriber to an event:
+        ````
         var clickHandler = function(payload) {
             console.log('inside clickHandler of buttonClicked event', payload); 
             // payload is the data sent by publisher.
         }
         var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
+        ```
 
 4. Unsubscribing to an event:
     1. Upon successful execution 'subscribe' function returns an object.
+        ```
         var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
+        ```
     2. value of object 'clickSubscriber': {unsubscribe: ƒ}
     3. Invoking clickSubscriber.unsubscribe(); successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
 
@@ -28,7 +34,9 @@
     3. @param { payload } object ( This is an optional parameter. Pass the data to be consumed in the eventHandler )
     4. pubsub.publish(event, payload);
     5. Example to publish an event:
+        ```
         pubsub.publish('buttonClicked', { source: 'resdex', appId: '112'});
+        ```
 
 6. Precautions to be kept while using:
     1. Always remember to clear ( unsubcribe ) the subscriber using the subsciption instance when the 
