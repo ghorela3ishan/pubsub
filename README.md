@@ -7,8 +7,10 @@
 
 # Subscribing to an event:
     1. Subscribe to an event using 'subscribe' function of the pubsub object.
-    2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a mandatory      parameter ). 
-    3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
+    2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a
+    mandatory parameter ). 
+    3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This
+    is a mandatory parameter )
     4. @param { context } object ( It is an optional parameter. Binds the eventHandler to given context. Arrow functions can't be binded to custom context).
         ```javascript
         subscribe(event, eventHandler, context);
