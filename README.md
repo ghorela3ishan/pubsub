@@ -1,6 +1,6 @@
 # Pubsub.js
 ## Pubsub.js
- Pubsub is a lightweight library that helps achieve communication between two applications using          publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs    of event and their corresponding handlers. (key is used to store the name of the event and it's value    is another object which in turn manages key value pairs of randomly time stamped generated keys and      subsciber handler of the events.)
+ Pubsub is a lightweight library that helps ain chieving communication between two applications using     publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs    of event and their corresponding handlers. (key is used to store the name of the event and it's value    is another object which in turn manages key value pairs of randomly time stamped generated keys and      subsciber handler of the events.)
 
 ## Pubsub.js global instance
  PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
@@ -12,7 +12,7 @@
  2. Run 'npm install'
  3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
  4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
- 
+
 ## Implementation
 1. Subscribing to an event:
     1. Subscribe to an event using 'subscribe' function of the pubsub object.
