@@ -11,6 +11,7 @@ if(typeof(window.pubsub) == 'undefined'){
          * subscriptions ( class property ) is an object that contains key value pairs of event 
          * (event type will be string) and an array of associated callbacks.
          */ 
+        
         constructor() {
             if(!PubsubClass.instance) {
                 this.subscriptions = {};
@@ -41,13 +42,15 @@ if(typeof(window.pubsub) == 'undefined'){
                 }
                 let eventHandlerWithContext = eventHandler.bind(context);
                 if(!this.subscriptions[event]) {
-                    this.subscriptions[event] = [];
+                    this.subscriptions[event] = {};
                 }
-                let position = this.subscriptions[event].push(eventHandlerWithContext);
-                let index = position - 1;
+                let timeStamp = +new Date();
+                let random = Math.random();
+                let key = timeStamp * random;
+                this.subscriptions[event][key] = eventHandlerWithContext;
                 return ({
                     unsubscribe: () => {
-                        this.subscriptions[event].splice(index, 1);
+                        delete this.subscriptions[event][key];
                     }   
                 });
             };
@@ -64,7 +67,8 @@ if(typeof(window.pubsub) == 'undefined'){
                 message: 'event name can not be left blank.'            
             };
             if(!this.subscriptions[event]) return;
-            this.subscriptions[event].forEach(eventHandler => {
+            Object.keys(this.subscriptions[event]).forEach((key) => {
+                let eventHandler = this.subscriptions[event][key];
                 eventHandler(payload);
             });
         };
