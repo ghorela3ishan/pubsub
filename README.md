@@ -51,12 +51,12 @@
         pubsub.publish('buttonClicked', { source: 'resdex', appId: '112'});
         ```
 
-# Precautions to be kept:
+## Precautions to be kept:
     1. Always remember to clear ( unsubcribe ) the subscriber using the subsciption instance when the 
     subscriber is no longer required. 
-    2. Avoid copies of subscription.
+    2. Avoid copies of subscription. Unsubscirbe before you subscribe again. If you have already subscribed to an event and subcribe again to the same event (eg: if you subscriber to an event on click of a button ), this will create a copy in the subscriptions.
 
-# For examples and illustrations, follow the steps below:
+## For examples and illustrations, follow the steps below:
     1. Clone the repo.
     2. Run 'npm install'
     3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
