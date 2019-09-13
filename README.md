@@ -6,6 +6,13 @@
  PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
  however it is ensured that even in the case when there are multiple imports on the same web page, only one common instance exists. Hence the instance is singleton in nature;
 
+
+## Setup
+ 1. Clone the repo.
+ 2. Run 'npm install'
+ 3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
+ 4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
+ 
 ## Implementation
 1. Subscribing to an event:
     1. Subscribe to an event using 'subscribe' function of the pubsub object.
@@ -56,9 +63,3 @@
  1. Always remember to clear ( unsubcribe ) the subscriber using the subsciption instance when the 
  subscriber is no longer required. 
  2. Avoid copies of subscription. Unsubscirbe before you subscribe again. If you have already subscribed to an event and subcribe again to the same event (eg: if you subscriber to an event on click of a button ), this will create a copy in the subscriptions.
-
-## For examples and illustrations, follow the steps below:
- 1. Clone the repo.
- 2. Run 'npm install'
- 3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
- 4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
