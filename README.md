@@ -13,7 +13,7 @@
     3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
     4. @param { context } object ( It is an optional parameter. Binds the eventHandler to given context. Arrow functions can't be binded to custom context).
     5. Example to subscribe to an event:
-        ````javascript
+        ```javascript
         var clickHandler = function(payload) {
             console.log('inside clickHandler of buttonClicked event', payload); 
             // payload is the data sent by publisher.
