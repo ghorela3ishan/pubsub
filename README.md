@@ -26,7 +26,7 @@
         ```
     2. value of object 'clickSubscriber': 
         ```
-        {unsubscribe: ƒ}
+        { unsubscribe: ƒ }
         ```
     3. Invoking clickSubscriber.unsubscribe(); successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
 
