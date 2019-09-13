@@ -4,6 +4,7 @@
    however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
 
 3. Subscribing to an event:
+
         ```javascript
         subscribe(event, eventHandler, context);
         ``` 
