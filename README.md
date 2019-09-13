@@ -57,7 +57,7 @@
  2. Avoid copies of subscription. Unsubscirbe before you subscribe again. If you have already subscribed to an event and subcribe again to the same event (eg: if you subscriber to an event on click of a button ), this will create a copy in the subscriptions.
 
 ## For examples and illustrations, follow the steps below:
-    1. Clone the repo.
-    2. Run 'npm install'
-    3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
-    4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
+ 1. Clone the repo.
+ 2. Run 'npm install'
+ 3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
+ 4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
