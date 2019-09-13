@@ -1,4 +1,4 @@
-1. Pubsub is a lightweight library that helps achieve communication between two applications using           publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs     of event and their corresponding handlers. (key is used to store the name of the event and it's value     is another object which in turn manages key value pairs of randomly time stamped generated keys and       subscibeds handler of the events.)
+1. Pubsub is a lightweight library that helps achieve communication between two applications using           publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs     of event and their corresponding handlers. (key is used to store the name of the event and it's value     is another object which in turn manages key value pairs of randomly time stamped generated keys and       subsciber handler of the events.)
 
 2. PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
    however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
@@ -11,21 +11,23 @@
         ```
         subscribe(event, eventHandler, context);
         ```
-    5. Example to subscriber to an event:
+    5. Example to subscribe to an event:
         ````
         var clickHandler = function(payload) {
             console.log('inside clickHandler of buttonClicked event', payload); 
             // payload is the data sent by publisher.
         }
         var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
-        ```
 
 4. Unsubscribing to an event:
     1. Upon successful execution 'subscribe' function returns an object.
         ```
         var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
         ```
-    2. value of object 'clickSubscriber': {unsubscribe: ƒ}
+    2. value of object 'clickSubscriber': 
+        ```
+        {unsubscribe: ƒ}
+        ```
     3. Invoking clickSubscriber.unsubscribe(); successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
 
 5. Publishing an event:
