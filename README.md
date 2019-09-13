@@ -3,14 +3,14 @@
 2. PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
    however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
 
-3. Subscribing to an event: 
+3. Subscribing to an event:
+        ```javascript
+        subscribe(event, eventHandler, context);
+        ``` 
     1. Subscribe to an event using 'subscribe' function of the pubsub object.
     2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a mandatory      parameter ). 
     3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
     4. @param { context } object ( It is an optional parameter. Binds the eventHandler to given context. Arrow functions can't be binded to custom context).
-        ```javascript
-        subscribe(event, eventHandler, context);
-        ```
     5. Example to subscribe to an event:
         ````javascript
         var clickHandler = function(payload) {
