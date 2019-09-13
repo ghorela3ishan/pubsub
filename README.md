@@ -38,7 +38,9 @@
     1. Publish to an event using 'publish' function of the pubsub object.
     2. @param { event } string ( This is a mandatory parameter. Throws an exception if event is blank or undefined )
     3. @param { payload } object ( This is an optional parameter. Pass the data to be consumed in the eventHandler )
-    4. pubsub.publish(event, payload);
+        ```javascript
+        pubsub.publish(event, payload);
+        ````
     5. Example to publish an event:
         ```javascript
         pubsub.publish('buttonClicked', { source: 'resdex', appId: '112'});
