@@ -28,7 +28,11 @@
         ```javascript
         { unsubscribe: ƒ }
         ```
-    3. Invoking clickSubscriber.unsubscribe(); successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
+    3. Invoking 
+        ```javascript
+        clickSubscriber.unsubscribe();
+        ``` 
+    successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
 
 5. Publishing an event:
     1. Publish to an event using 'publish' function of the pubsub object.
