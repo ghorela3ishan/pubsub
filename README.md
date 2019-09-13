@@ -5,6 +5,7 @@
  PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
  however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
 
+## Implementation
 1. Subscribing to an event:
     1. Subscribe to an event using 'subscribe' function of the pubsub object.
     2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a
