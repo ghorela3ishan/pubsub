@@ -2,10 +2,11 @@
 import instance from './pubsub/PubSub';
 import PubsubWrapped from './PubsubWrapped';
 
+// Cases pertaining to event 'shout'.
 // 1 Subsciber wrapped in a class.
 let PubsubWrappedInstance = new PubsubWrapped(); 
 
-// 1 Create ordinary subscriber with arrow function. ( arrow functions can't be binded to external context )
+// 2 Create ordinary subscriber with arrow function. ( arrow functions can't be binded to external context )
 // so they always refer to context of their parent scope.
 let eventHandler = (data) => {
     console.log('From ordinary arrow function subscriber ( 2 )', data);
@@ -13,14 +14,14 @@ let eventHandler = (data) => {
 let ordinary = instance.subscribe('shout', eventHandler);
 // ordinary.unsubscribe();
 
-// 2. Create subscriber with inline callback
+// 3. Create subscriber with inline callback
 window.globalVar = 44;
 let inline = pubsub.subscribe('shout', function(){
     console.log('From Inline ( 3 ) subsciber', this.globalVar);
 });
 // inline.unsubscribe();
 
-// 3. Create subscriber with predefined context
+// 4. Create subscriber with predefined context
 let moduleObj = {
     x: 42,
     getX: function() {
@@ -31,7 +32,7 @@ let moduleEventHandler = moduleObj.getX;
 let moduleSubObj = pubsub.subscribe('shout', moduleEventHandler, moduleObj);
 // moduleSubObj.unsubscribe();
 
-// 4 passing an invalid eventHandler 
+// 5 passing an invalid eventHandler 
 let inValidaHandler = '4';
 try {
     let exceptionObj = pubsub.subscribe('', moduleEventHandler);
@@ -43,9 +44,9 @@ try {
 setTimeout(function(){
     pubsub.publish('shout', 'yayy');
 }, 5000);
-pubsub.subscribe('shout', function() {alert('synced')});
+pubsub.subscribe('shout', function() {alert('synced to shout event')});
 
-// New event shout2
+// Demonstration related to event shout2
 pubsub.subscribe('shout2', function(){alert(' From shout2 ( 0 )')})
 try {
     pubsub.publish('shout2');

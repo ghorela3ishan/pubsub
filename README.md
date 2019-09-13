@@ -1,28 +1,42 @@
-1. Pubsub is a library to achieve communication between two applications using publisher subsciber model.
+1. Pubsub is a lightweight library that helps achieve communication between two applications using           publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs     of event and their corresponding handlers. (key is used to store the name of the event and it's value     is another object which in turn manages key value pairs of randomly time stamped generated keys and       subscibeds handler of the events.)
 
-2. PubsubClass instance (pubsub) is available globally or can be imported from './pubsub/PubSub';
+2. PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
+   however it is ensured that even in the case when there are multiple imports on the same page, only one common instance is managed. Hence the instance is singleton in nature;
 
 3. Subscribing to an event: 
-    Subscribe to an event using 'subscribe' function of the pubsub object.
-    @param { string }  event ( Throws a exception if string is blank or undefined. This is a mandatory      parameter ). 
-    @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
-    @param { context } object ( It is an optional parameter. Binds the eventHandler to given context. Arrow functions can't be binded to custom context)
-    subscribe(event, eventHandler, context);
+    1. Subscribe to an event using 'subscribe' function of the pubsub object.
+    2. @param { string }  event ( Throws an exception if string is blank or undefined. This is a mandatory      parameter ). 
+    3. @param { eventHandler } callback ( Throws a exception if passed anything except a callback. This is a mandatory parameter )
+    4. @param { context } object ( It is an optional parameter. Binds the eventHandler to given context. Arrow functions can't be binded to custom context).
+        subscribe(event, eventHandler, context);
+    5. Example to subscriber to an event:
+        var clickHandler = function(payload) {
+            console.log('inside clickHandler of buttonClicked event', payload); 
+            // payload is the data sent by publisher.
+        }
+        var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
 
 4. Unsubscribing to an event:
-    Upon successful execution 'subscribe' function returns an object.
-    let subscription = subscribe(event, eventHandler, context);
-    value of object 'subscription': {unsubscribe: ƒ}
-    Invoking subscription.unsubscribe(); successfully removes the associated eventHandler from the subscriber bus.
+    1. Upon successful execution 'subscribe' function returns an object.
+        var clickSubscriber = pubsub.subscribe('buttonClicked', clickHandler, this);
+    2. value of object 'clickSubscriber': {unsubscribe: ƒ}
+    3. Invoking clickSubscriber.unsubscribe(); successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
 
 5. Publishing an event:
-    Publish to an event using 'publish' function of the pubsub object.
-    @param { event } string ( This is a mandatory parameter. Throws an exception if event is blank or undefined )
-    @param { payload } object ( This is an optional parameter. Pass the data to be consumed in the eventHandler )
-    pubsub.publish(event, payload);
+    1. Publish to an event using 'publish' function of the pubsub object.
+    2. @param { event } string ( This is a mandatory parameter. Throws an exception if event is blank or undefined )
+    3. @param { payload } object ( This is an optional parameter. Pass the data to be consumed in the eventHandler )
+    4. pubsub.publish(event, payload);
+    5. Example to publish an event:
+        pubsub.publish('buttonClicked', { source: 'resdex', appId: '112'});
 
-6. For examples and illustrations, follow the steps below:
-    -> clone the repo.
-    -> run 'npm install'
-    -> run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around pubsub model)
-    -> for prod build 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. )
+6. Precautions to be kept while using:
+    1. Always remember to clear ( unsubcribe ) the subscriber using the subsciption instance when the 
+    subscriber is no longer required. 
+    2. Avoid copies of subscription.
+
+7. For examples and illustrations, follow the steps below:
+    1. Clone the repo.
+    2. Run 'npm install'
+    3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
+    4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
