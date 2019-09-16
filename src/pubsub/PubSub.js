@@ -31,13 +31,13 @@ if(typeof(window.pubsub) == 'undefined'){
                 if (event == '' || event == undefined) {
                     throw { 
                             type: 'Error',
-                            message: 'event name can not be left blank.'            
+                            message: 'event name is not defined.'            
                     }
                 }
                 if (typeof(eventHandler) != 'function') {
                     throw { 
                             type: 'Error',
-                            message: `eventHandler ${eventHandler} must be of type function`            
+                            message: `eventHandler '${eventHandler}' must be of type function`            
                     }
                 }
                 let eventHandlerWithContext = eventHandler.bind(context);
@@ -64,7 +64,7 @@ if(typeof(window.pubsub) == 'undefined'){
         publish = (event, payload) => {
             if( event == '' || event == undefined) throw { 
                 type: 'Error',
-                message: 'event name can not be left blank.'            
+                message: 'event name is not defined.'            
             };
             if(!this.subscriptions[event]) return;
             Object.keys(this.subscriptions[event]).forEach((key) => {
