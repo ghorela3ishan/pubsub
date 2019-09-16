@@ -1,9 +1,9 @@
 # Pubsub.js
 ## Pubsub.js
- Pubsub is a lightweight library that helps in chieving communication between two applications using     publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs    of event and their corresponding handlers. (key is used to store the name of the event and it's value    is another object which in turn manages key value pairs of randomly time stamped generated keys and      subsciber handler of the events.)
+ Pubsub is a lightweight library that helps in achieving communication between two web applications ( running concurrently in the same tab ) using publisher subsciber model. Internally it maintains an object 'subscriptions' to store key value pairs of event and their corresponding handlers. (key is used to store the name of the event and it's value is another object which in turn manages key value pairs of randomly time stamped generated keys and subsciber's handler of the event.)
 
 ## Pubsub.js global instance
- PubsubClass instance ( 'pubsub' ) is available globally or can be imported from './pubsub/PubSub', 
+ PubsubClass instance ( 'pubsub' ) is available globally or can be imported from '.src/pubsub/PubSub', 
  however it is ensured that even in the case when there are multiple imports on the same web page, only one common instance exists. Hence the instance is singleton in nature;
 
 
@@ -11,7 +11,7 @@
  1. Clone the repo.
  2. Run 'npm install'
  3. Run 'npm run dev' and visit http://localhost:8080/. ( './src/index.js' has practical implementations of a few testcases around publisher subcriber model.)
- 4. For production ready build run: 'npm run prod'. ( production build only converts './pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in 'dist' folder at root level.
+ 4. For production ready build run: 'npm run prod'. ( production build only converts '.src/pubsub/PubSub' to a transpiled and minified version ready to be consumed in application. ). Build is created in './dist'.
 
 ## Implementation
 1. Subscribing to an event:
@@ -46,6 +46,7 @@
         clickSubscriber.unsubscribe();
         ``` 
         successfully removes the associated eventHandler ( clickHandler ) from the subscriber bus.
+        ( You need to explicitly unsubscribe from an event to remove it otherwise it will stay there permanently. )
 
 3. Publishing an event:
     1. Publish to an event using 'publish' function of the pubsub object.
